@@ -30,9 +30,9 @@ function handleComplete() {
     stage.addChild(astronaut);
 
 
-    document.body.addEventListener("oncontextmenu", function (e) {
-        e.stopPropagation();
-        return !1;
+    document.getElementById("demoCanvas").addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        return false;
     });
 
     stage.on("stagemousedown", function (e) {
