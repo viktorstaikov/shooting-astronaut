@@ -1,0 +1,21 @@
+{
+  "name": "shooting-astronaut",
+  "version": "0.0.0",
+  "description": "Some astronaut shooting somewhere",
+  "main": "index.html",
+  "keywords": [
+    "game"
+  ],
+  "authors": [
+    "Viktor Staykov"
+  ],
+  "license": "MIT",
+  "homepage": "none",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
