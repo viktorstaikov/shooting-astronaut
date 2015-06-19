@@ -42,12 +42,13 @@
         var s = this;
         var time = 5 * Math.sqrt((x - s.x) * (x - s.x) + (y - s.y) * (y - s.y));
 
-        var astronautMovement = this.movement || createjs.Tween.get(s, {
+        var move = this.movement || createjs.Tween.get(s, {
             override: true
         });
+
         s.character.gotoAndPlay("run");
 
-        astronautMovement.to({
+        move.to({
             x: x,
             y: y
         }, time).call(function () {
@@ -56,7 +57,8 @@
     }
 
     p.shoot = function (x, y) {
-
+        var r = new Rocket(this.x, this.y, x, y);
+        return r;
     }
 
     window.Shooter = createjs.promote(Shooter, "Container");
