@@ -11,14 +11,13 @@
 
     p.move = function (x, y) {
         var s = this;
+        s.character.gotoAndPlay("run");
+
         var time = 5 * Math.sqrt((x - s.x) * (x - s.x) + (y - s.y) * (y - s.y));
 
         var move = this.movement || createjs.Tween.get(s, {
             override: true
         });
-
-        s.character.gotoAndPlay("run");
-
         move.to({
             x: x,
             y: y

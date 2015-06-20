@@ -16,7 +16,7 @@ function init() {
     }, {
         src: "./assets/astronaut.png",
         id: "astronaut"
-    }, "shooter.js", "astronaut.js", "rocket.js", "button.js"];
+    }, "shooter.js", "astronaut.js", "rocket.js", "beep.js", "button.js"];
 
     loader = new createjs.LoadQueue(false);
     loader.addEventListener("complete", handleComplete);
@@ -38,7 +38,6 @@ function handleComplete() {
 
         stage.addChild(astronaut);
 
-
         addStageEventHandlers();
     });
 
@@ -55,6 +54,8 @@ function tick(event) {
 function addStageEventHandlers() {
     stage.on("stagemousedown", function (e) {
         if (e.nativeEvent.button == 2) {
+
+            stage.addChild(new Beep(e.rawX, e.rawY));
             astronaut.move(e.rawX, e.rawY);
         } else if (e.nativeEvent.button == 0) {
             stage.addChild(astronaut.shoot(e.rawX, e.rawY));
