@@ -37,6 +37,9 @@ function handleComplete() {
         astronaut = new Astronaut(e.rawX, e.rawY);
 
         stage.addChild(astronaut);
+
+
+        addStageEventHandlers();
     });
 
     stage.addChild(button);
