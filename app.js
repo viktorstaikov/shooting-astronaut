@@ -1,5 +1,5 @@
 var stage, w, h, loader;
-var sky, explosion, rocket, astronaut;
+var astronaut;
 
 function init() {
     stage = new createjs.Stage("demoCanvas");
@@ -7,20 +7,20 @@ function init() {
     w = stage.canvas.width;
     h = stage.canvas.height;
 
-    manifest = [{
-        src: "explosion.png",
+    var manifest = [{
+        src: "./assets/explosion.png",
         id: "explosion"
     }, {
-        src: "rocket.png",
+        src: "./assets/rocket.png",
         id: "rocket"
     }, {
-        src: "astronaut.png",
+        src: "./assets/astronaut.png",
         id: "astronaut"
-    }];
+    }, "shooter.js", "astronaut.js", "rocket.js", "beep.js", "button.js"];
 
     loader = new createjs.LoadQueue(false);
     loader.addEventListener("complete", handleComplete);
-    loader.loadManifest(manifest, true, "./assets/");
+    loader.loadManifest(manifest, true, "./");
 
     document.getElementById("demoCanvas").addEventListener("contextmenu", function (e) {
         e.preventDefault();
@@ -38,7 +38,6 @@ function handleComplete() {
 
         stage.addChild(astronaut);
 
-
         addStageEventHandlers();
     });
 
@@ -55,6 +54,8 @@ function tick(event) {
 function addStageEventHandlers() {
     stage.on("stagemousedown", function (e) {
         if (e.nativeEvent.button == 2) {
+
+            stage.addChild(new Beep(e.rawX, e.rawY));
             astronaut.move(e.rawX, e.rawY);
         } else if (e.nativeEvent.button == 0) {
             stage.addChild(astronaut.shoot(e.rawX, e.rawY));
