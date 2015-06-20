@@ -29,10 +29,27 @@ function init() {
 }
 
 function handleComplete() {
-    astronaut = new Shooter();
-    astronaut.init(h / 2, w / 2);
-    stage.addChild(astronaut);
+    var button = new Button("START GAME", w / 2, 200);
 
+    button.on("click", function (e) {
+        stage.removeChild(button);
+
+        astronaut = new Astronaut(e.rawX, e.rawY);
+
+        stage.addChild(astronaut);
+    });
+
+    stage.addChild(button);
+
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+    createjs.Ticker.addEventListener("tick", tick);
+}
+
+function tick(event) {
+    stage.update();
+}
+
+function addStageEventHandlers() {
     stage.on("stagemousedown", function (e) {
         if (e.nativeEvent.button == 2) {
             astronaut.move(e.rawX, e.rawY);
@@ -45,13 +62,5 @@ function handleComplete() {
         var c = Math.atan2(e.rawY - astro.y, e.rawX - astro.x);
         c *= 180 / Math.PI;
         astro.rotation = 90 + c;
-    }, null, !1, astronaut);
-
-    createjs.Ticker.timingMode = createjs.Ticker.RAF;
-    createjs.Ticker.addEventListener("tick", tick);
-
-}
-
-function tick(event) {
-    stage.update();
+    }, null, false, astronaut);
 }
