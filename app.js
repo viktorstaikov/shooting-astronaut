@@ -1,5 +1,5 @@
 var stage, w, h, loader;
-var sky, explosion, rocket, astronaut;
+var astronaut;
 
 function init() {
     stage = new createjs.Stage("demoCanvas");
@@ -7,20 +7,20 @@ function init() {
     w = stage.canvas.width;
     h = stage.canvas.height;
 
-    manifest = [{
-        src: "explosion.png",
+    var manifest = [{
+        src: "./assets/explosion.png",
         id: "explosion"
     }, {
-        src: "rocket.png",
+        src: "./assets/rocket.png",
         id: "rocket"
     }, {
-        src: "astronaut.png",
+        src: "./assets/astronaut.png",
         id: "astronaut"
-    }];
+    }, "shooter.js", "astronaut.js", "rocket.js", "button.js"];
 
     loader = new createjs.LoadQueue(false);
     loader.addEventListener("complete", handleComplete);
-    loader.loadManifest(manifest, true, "./assets/");
+    loader.loadManifest(manifest, true, "./");
 
     document.getElementById("demoCanvas").addEventListener("contextmenu", function (e) {
         e.preventDefault();
